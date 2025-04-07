@@ -11,12 +11,12 @@ const App: React.FC = () => {
   };
 
   const navItems = [
-    { name: 'About', path: '/website/about' },
-    { name: 'Education', path: '/website/education' },
-    { name: 'Work History', path: '/website/work-history' },
-    { name: 'Tech Stack', path: '/website/tech-stack' },
-    { name: 'Projects', path: '/website/projects' },
-    { name: 'Contact', path: '/website/contact' },
+    { name: 'About', path: '/about' },
+    { name: 'Education', path: '/education' },
+    { name: 'Work History', path: '/work-history' },
+    { name: 'Tech Stack', path: '/tech-stack' },
+    { name: 'Projects', path: '/projects' },
+    { name: 'Contact', path: '/contact' },
   ];
 
   return (
