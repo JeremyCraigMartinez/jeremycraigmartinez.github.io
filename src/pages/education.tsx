@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
+type Expanded = 'GT' | 'WSU' | ''
+
 const Education: React.FC = () => {
-  const [openGT, setOpenGT] = useState(false);
-  const [openWSU, setOpenWSU] = useState(false);
+  const [isExpanded, expand] = useState<Expanded>('');
+  const toggleSchool = (school: Expanded) => isExpanded === school ? '' : school
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-6">
@@ -12,7 +14,7 @@ const Education: React.FC = () => {
       {/* Georgia Tech */}
       <div className="mb-4">
         <button
-          onClick={() => setOpenGT(!openGT)}
+          onClick={() => expand(toggleSchool('GT'))}
           className="w-full bg-white border border-gray-200 rounded-2xl shadow-md hover:shadow-[0_4px_20px_0_rgba(179,163,105,0.5)] p-4 text-left transition-shadow duration-300"
         >
           <div className="flex justify-between items-center">
@@ -21,17 +23,12 @@ const Education: React.FC = () => {
               <p className="text-sm text-gray-600">2018-2021 • GPA: 3.4</p>
               <p className="text-sm text-gray-600">Master of Science in Computer Science - Specialization in Interactive Intelligence</p>
             </div>
-            {openGT ? <ChevronUp /> : <ChevronDown />}
+            {isExpanded === 'GT' ? <ChevronUp /> : <ChevronDown />}
           </div>
         </button>
 
-        {/* `transition-all duration-500 ease-in-out overflow-hidden mt-3 bg-gray-50 p-4 rounded-xl border border-gray-100 ${
-    openWSU ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
-  }` */}
-
-        {openGT && (
+        {isExpanded === 'GT' && (
           <div className="w-full min-w-full mt-3 bg-gray-50 p-4 rounded-xl border border-gray-100">
-            <h4 className="text-lg font-semibold mb-2 text-[#003057]">Related School Experience</h4>
             <ul className=" list-inside text-sm space-y-2">
               <li>
                 <strong>Graduate Algorithms</strong> (Summer 2021)
@@ -135,7 +132,7 @@ const Education: React.FC = () => {
       {/* Washington State University */}
       <div>
         <button
-          onClick={() => setOpenWSU(!openWSU)}
+          onClick={() => expand(toggleSchool('WSU'))}
           className="w-full bg-white border border-gray-200 rounded-2xl shadow-md hover:shadow-[0_4px_20px_0_rgba(152,30,50,0.4)] p-4 text-left transition-shadow duration-300"
         >
           <div className="flex justify-between items-center">
@@ -144,10 +141,10 @@ const Education: React.FC = () => {
               <p className="text-sm text-gray-600">2011-2015 • GPA: 3.35</p>
               <p className="text-sm text-gray-600">Bachelor of Science in Computer Science</p>
             </div>
-            {openWSU ? <ChevronUp /> : <ChevronDown />}
+            {isExpanded === 'WSU' ? <ChevronUp /> : <ChevronDown />}
           </div>
         </button>
-        {openWSU && (
+        {isExpanded === 'WSU' && (
           <div className="mt-3 bg-gray-50 p-4 rounded-xl border border-gray-100">
             <ul className=" list-inside text-sm space-y-2">
               <li>
