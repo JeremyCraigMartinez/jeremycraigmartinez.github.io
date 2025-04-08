@@ -1,40 +1,164 @@
-import { useEffect, useState, useMemo } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import type { RootState } from "../store";
-import { getProjects } from "../side-effects/todos";
-import type { Todo } from "../side-effects/todos";
-import { actionIncrement, actionDecrement } from "../store/actions";
+import { useState } from "react";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 const Education: React.FC = () => {
-    const count = useSelector((state: RootState) => state.home.count);
-    const dispatch = useDispatch();
+  const [openGT, setOpenGT] = useState(false);
+  const [openWSU, setOpenWSU] = useState(false);
 
-    const [todos, setTodos] = useState<Todo[]>([]);
+  return (
+    <div className="max-w-3xl mx-auto px-4 py-6">
+      <h2 className="text-3xl font-bold text-center mb-6">Education</h2>
 
-    useEffect(() => {
-        getProjects(setTodos)
-    }, [])
+      {/* Georgia Tech */}
+      <div className="mb-4">
+        <button
+          onClick={() => setOpenGT(!openGT)}
+          className="w-full bg-white border border-gray-200 rounded-2xl shadow-md hover:shadow-[0_4px_20px_0_rgba(179,163,105,0.5)] p-4 text-left transition-shadow duration-300"
+        >
+          <div className="flex justify-between items-center">
+            <div>
+              <h3 className="text-xl font-semibold">Georgia Institute of Technology</h3>
+              <p className="text-sm text-gray-600">2018-2021 • GPA: 3.4</p>
+              <p className="text-sm text-gray-600">Master of Science in Computer Science - Specialization in Interactive Intelligence</p>
+            </div>
+            {openGT ? <ChevronUp /> : <ChevronDown />}
+          </div>
+        </button>
 
-    const sortedList = useMemo(() => todos.sort(
-        (a, b) => a.title.localeCompare(b.title, undefined, { sensitivity: 'base' })
-    ), [todos])
+        {/* `transition-all duration-500 ease-in-out overflow-hidden mt-3 bg-gray-50 p-4 rounded-xl border border-gray-100 ${
+    openWSU ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
+  }` */}
 
-    return (
-        <>
-            <h1>Education</h1>
-
-            <ul>
-                {sortedList.map(item => (
-                    <li>{item.title}</li>
-                ))}
+        {openGT && (
+          <div className="w-full min-w-full mt-3 bg-gray-50 p-4 rounded-xl border border-gray-100">
+            <h4 className="text-lg font-semibold mb-2 text-[#003057]">Related School Experience</h4>
+            <ul className=" list-inside text-sm space-y-2">
+              <li>
+                <strong>Graduate Algorithms</strong> (Summer 2021)
+                <ul className="ml-4 ">
+                  <li>Dynamic programming, divide & conquer, graph algorithms (BFS, DFS, Dijkstra’s), max-flow, linear programming, NP-complete</li>
+                </ul>
+              </li>
+              <li>
+                <strong>Deep Learning</strong> (Fall 2020)
+                <ul className="ml-4 ">
+                  <li>CNN model construction - linear layer, max pooling, loss function</li>
+                  <li>PyTorch application to larger scaled models</li>
+                  <li>
+                    fastMRI model implementation -&nbsp;
+                    <a
+                      href="https://github.com/kapoor1992/CS7643_Project"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 underline"
+                    >
+                      GitHub Link
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <strong>Reinforcement Learning</strong> (Summer 2020)
+                <ul className="ml-4 ">
+                  <li>
+                    Lunar lander leveraging Q-learning -&nbsp;
+                    <a
+                      href="https://github.com/JeremyCraigMartinez/RL-CS7642/blob/master/p2/main.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 underline"
+                    >
+                      Code and Report
+                    </a>
+                  </li>
+                  <li>
+                    Correlated Q-learning recreation -&nbsp;
+                    <a
+                      href="https://github.com/JeremyCraigMartinez/RL-CS7642/blob/master/p3/main.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 underline"
+                    >
+                      Report
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <strong>Machine Learning</strong> (Spring 2018)
+                <ul className="ml-4 ">
+                  <li>
+                    Markov decision process - elevation gain through Seattle -&nbsp;
+                    <a
+                      href="https://github.com/JeremyCraigMartinez/omscs-cs7641-machine-learning-assignment-4/blob/master/jmartinez91-analysis.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 underline"
+                    >
+                      Report
+                    </a>
+                  </li>
+                  <li>
+                    Unsupervised learning & dimensionality reduction -&nbsp;
+                    <a
+                      href="https://github.com/JeremyCraigMartinez/CS-7641-assignment-3/blob/master/jmartinez91-analysis.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 underline"
+                    >
+                      Report
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <strong>Human Computer Interaction</strong> (Fall 2019)
+                <ul className="ml-4 ">
+                  <li>
+                    Project on breakdown of elevator interface -&nbsp;
+                    <a
+                      href="https://github.com/JeremyCraigMartinez/CS6750-HCI/blob/master/Project%20P/main.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 underline"
+                    >
+                      Report
+                    </a>
+                  </li>
+                </ul>
+              </li>
             </ul>
+          </div>
+        )}
+      </div>
 
-            <hr />
-            <p>The current count is {count + todos.length}</p>
-            <button onClick={() => dispatch(actionIncrement())}>Add</button>
-            <button onClick={() => dispatch(actionDecrement())}>Remove</button>
-        </>
-    );
-}
+      {/* Washington State University */}
+      <div>
+        <button
+          onClick={() => setOpenWSU(!openWSU)}
+          className="w-full bg-white border border-gray-200 rounded-2xl shadow-md hover:shadow-[0_4px_20px_0_rgba(152,30,50,0.4)] p-4 text-left transition-shadow duration-300"
+        >
+          <div className="flex justify-between items-center">
+            <div>
+              <h3 className="text-xl font-semibold">Washington State University</h3>
+              <p className="text-sm text-gray-600">2011-2015 • GPA: 3.35</p>
+              <p className="text-sm text-gray-600">Bachelor of Science in Computer Science</p>
+            </div>
+            {openWSU ? <ChevronUp /> : <ChevronDown />}
+          </div>
+        </button>
+        {openWSU && (
+          <div className="mt-3 bg-gray-50 p-4 rounded-xl border border-gray-100">
+            <ul className=" list-inside text-sm space-y-2">
+              <li>
+                Junior Writing Portfolio - <strong>Pass with Distinction</strong> - Top 10% of Graduating Class
+              </li>
+            </ul>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
 
 export default Education;

@@ -24,7 +24,7 @@ const App: React.FC = () => {
       {/* Header Section */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-cyan-800 text-white shadow-md">
         <nav className="container mx-auto flex justify-between items-center p-4">
-          <div className="text-lg font-bold">My Portfolio</div>
+          <div className="text-lg font-bold"></div>
           <div className="md:hidden">
             <button onClick={toggleMenu} className="focus:outline-none">
               {isOpen ? (
@@ -34,7 +34,7 @@ const App: React.FC = () => {
               )}
             </button>
           </div>
-          <ul className={`md:flex ${isOpen ? 'block' : 'hidden'} md:block`}>
+          <ul id="nav" className={`md:flex ${isOpen ? 'block' : 'hidden'} md:block`}>
             {navItems.map((item, index, array) => (
               <li key={item.name} className={`px-4 py-2 ${index < array.length - 1 ? 'border-r' : ''}`}>
                 <NavLink
@@ -53,7 +53,7 @@ const App: React.FC = () => {
       </header>
 
       {/* Main Content Section */}
-      <main className="container mx-auto p-4 pt-16">
+      <main className="mx-auto p-4 pt-16 max-w-screen-2xl w-full">
         {/* Routes will be rendered here */}
       </main>
     </div>
